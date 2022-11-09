@@ -12,6 +12,7 @@ def search_by_title(title):
 
 # Requisito 7
 def search_by_date(date):
+    # https://www.codespeedy.com/change-the-format-of-date-in-python/
     try:
         date_to_ISO = datetime.strptime(date, "%Y-%m-%d").strftime("%d/%m/%Y")
         data_list = search_news({'timestamp': date_to_ISO})
@@ -21,11 +22,11 @@ def search_by_date(date):
         raise ValueError("Data inválida")
 
 
-
-
 # Requisito 8
 def search_by_tag(tag):
     """Seu código deve vir aqui"""
+    data_list = search_news({"tags": {"$regex": tag, "$options": "i"}})
+    return [(news['title'], news['url']) for news in data_list]
 
 
 # Requisito 9
